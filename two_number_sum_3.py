@@ -9,16 +9,17 @@
 """
 
 
-# Solution 1; O(n^2) time | O(1) space:
-# least effective one -> two for loops
+# Solution 2; O(n) time | O(n) space:
 
 def twoNumberSum(array, targetSum):
-    for i in range(len(array) - 1):
-        first_num = array[i]
-        for j in range(i + 1, len(array)):
-            second_num = array[j]
-            if first_num + second_num == targetSum:
-                return sorted([first_num, second_num])
+    nums = {}
+    for i in array:
+        potential_match = targetSum - i
+        if potential_match in nums:
+            return [potential_match, i]
+        else:
+            nums[i] = True
     return []
+
 
 print(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10))

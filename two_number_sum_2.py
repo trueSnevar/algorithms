@@ -8,17 +8,21 @@
   < Sample output: [-1, 11]
 """
 
-
-# Solution 1; O(n^2) time | O(1) space:
-# least effective one -> two for loops
+# Solution 2; O(nlog(n)) time | O(1) space:
+# sorting input array first
 
 def twoNumberSum(array, targetSum):
-    for i in range(len(array) - 1):
-        first_num = array[i]
-        for j in range(i + 1, len(array)):
-            second_num = array[j]
-            if first_num + second_num == targetSum:
-                return sorted([first_num, second_num])
+    array.sort()
+    left = 0
+    right = len(array) - 1
+    while left < right:
+        currentSum = array[left] + array[right]
+        if currentSum == targetSum:
+            return [array[left], array[right]]
+        elif currentSum < targetSum:
+            left += 1
+        elif currentSum > targetSum:
+            right -= 1
     return []
 
 print(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10))
